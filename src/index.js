@@ -35,11 +35,15 @@ async function voteForDhoni() {
                 const frame = frames[index];
                 frame.$(dhoniSelector).then((element) => {
                     if (element) {
-                        element.click().then(async () => {
+                        element.click().then(() => {
                             console.log("Voted for Dhoni!")
                             votedForDhoni = true;
-                            var val = await (await (await frame.$(totalVotesCountSelector)).getProperty('textContent')).jsonValue();
-                            console.log("Total votes so far: " + val);
+                            frame.$(totalVotesCountSelector).then(async (span) => {
+                                var val = await (await span.getProperty('textContent')).jsonValue();
+                                console.log("Total votes so far: " + val);
+                            }, (reason) => {
+                                console.log("Could not get the total votes element because: " + reason);
+                            });
                         });
                     }
                 }, (reason) => {
