@@ -39,7 +39,7 @@ async function voteForDhoni() {
                             console.log("Voted for Dhoni!")
                             setTimeout(() => {
                                 votedForDhoni = true;
-                            }, 2000)
+                            }, 4000)
                             frame.$(totalVotesCountSelector).then(async (span) => {
                                 var val = await (await span.getProperty('textContent')).jsonValue();
                                 console.log("Total votes so far: " + val);
